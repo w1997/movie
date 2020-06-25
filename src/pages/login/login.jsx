@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import { Form, Input, Button,} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './login.css'
+import {resLogin} from "../../api/index"
 export default class Login extends Component {
     onFinish = values => {
         //写ajax请求，拿数据
-        let url="https://www.cnblogs.com/tommymarc/p/11991533.html";
-        axios.get(url).then((res)=>{
-
-        }).catch((err)=>{
-            console.log(err.message)
+        let {username,password}=values;
+        resLogin(username,password).then(response=>{
+            console.log("成功了",response.data)
+        }).catch(error=>{
+            console.log("失败了",error)
         })
+        
         console.log('Received values of form: ', values);
     };
     render() {
